@@ -12,6 +12,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "FINCA")
 public class Finca {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFinca;
@@ -37,6 +38,9 @@ public class Finca {
     @Column(name = "OBSERVACIONES")
     private String observaciones;
 
+    @Column(name = "FOTO")
+    private byte[] foto;
+
     public Finca(Long idUsuario, String nombre, String direccion, double areaTotal, LocalDateTime fechaRegistro,
             String descripcionFinca, String observaciones) {
         this.idUsuario = idUsuario;
@@ -46,6 +50,18 @@ public class Finca {
         this.fechaRegistro = fechaRegistro;
         this.descripcionFinca = descripcionFinca;
         this.observaciones = observaciones;
+    }
+
+    public Finca(Long idUsuario, String nombre, String direccion, double areaTotal, LocalDateTime fechaRegistro,
+            String descripcionFinca, String observaciones, byte[] foto) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.areaTotal = areaTotal;
+        this.fechaRegistro = fechaRegistro;
+        this.descripcionFinca = descripcionFinca;
+        this.observaciones = observaciones;
+        this.foto = foto;
     }
 
     public Finca() {
@@ -113,5 +129,13 @@ public class Finca {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }
