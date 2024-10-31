@@ -1,9 +1,12 @@
 package com.rancho_smart.ms_infraestructura.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,7 +15,6 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "FINCA")
 public class Finca {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idFinca;
@@ -41,19 +43,14 @@ public class Finca {
     @Column(name = "FOTO")
     private byte[] foto;
 
-    public Finca(Long idUsuario, String nombre, String direccion, double areaTotal, LocalDateTime fechaRegistro,
-            String descripcionFinca, String observaciones) {
-        this.idUsuario = idUsuario;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.areaTotal = areaTotal;
-        this.fechaRegistro = fechaRegistro;
-        this.descripcionFinca = descripcionFinca;
-        this.observaciones = observaciones;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Long> empleados;
+
+    public Finca() {
     }
 
     public Finca(Long idUsuario, String nombre, String direccion, double areaTotal, LocalDateTime fechaRegistro,
-            String descripcionFinca, String observaciones, byte[] foto) {
+            String descripcionFinca, String observaciones, byte[] foto, List<Long> empleados) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -62,9 +59,7 @@ public class Finca {
         this.descripcionFinca = descripcionFinca;
         this.observaciones = observaciones;
         this.foto = foto;
-    }
-
-    public Finca() {
+        this.empleados = empleados;
     }
 
     public Long getIdFinca() {
@@ -138,4 +133,14 @@ public class Finca {
     public void setFoto(byte[] foto) {
         this.foto = foto;
     }
+
+    public List<Long> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(List<Long> empleados) {
+        this.empleados = empleados;
+    }
+
+    
 }
