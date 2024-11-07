@@ -19,6 +19,10 @@ public class FincaService {
         return fincaRepository.findAll();
     }
 
+    public List<Finca> getFincasByIdUsuario(Long idUsuario){
+        return this.fincaRepository.findByIdUsuario(idUsuario);
+    }
+
     public Optional<Finca> getFincaById(Long id) {
         return fincaRepository.findById(id);
     }

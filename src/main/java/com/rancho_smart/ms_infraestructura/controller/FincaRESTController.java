@@ -31,6 +31,16 @@ public class FincaRESTController {
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/usuario/{idUsuario}")
+    public ResponseEntity<List<Finca>> getFincasByIdUsuario(@PathVariable Long idUsuario){
+        List<Finca> fincasUsuario = this.fincaService.getFincasByIdUsuario(idUsuario);
+        if(!fincasUsuario.isEmpty()){
+            return new ResponseEntity<>(fincasUsuario, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Finca> createFinca(@RequestBody Finca finca) {
         Finca newFinca = fincaService.saveFinca(finca);
